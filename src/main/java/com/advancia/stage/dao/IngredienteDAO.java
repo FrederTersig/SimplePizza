@@ -20,7 +20,7 @@ import com.advancia.stage.dto.IngredienteDTO;
 import com.advancia.stage.model.Impasto;
 import com.advancia.stage.model.Ingrediente;
 import com.advancia.stage.util.Gestore;
-import com.advancia.stage.util.Utility;
+import com.advancia.stage.util.ListModel;
 
 public class IngredienteDAO {
 
@@ -69,7 +69,7 @@ public class IngredienteDAO {
 			Query query = em.createQuery(q);
 			res = (ArrayList<Ingrediente>) query.getResultList();
 			
-			list = Utility.transformToIngredienteDTO(res);
+			list = ListModel.transformToIngredienteDTO(res);
 			
 		}catch (NoResultException e) {
 			System.out.println("Nessun risultato per la query - " + e);

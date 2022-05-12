@@ -36,20 +36,11 @@ public class UtenteService {
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUtente_JSON() {
-//    	//GIUSTO - no DTO
-//    	List<Utente> listaUtente;
-//    	GenericEntity<List<Utente>> entity;
-//    	listaUtente = UtenteDAO.allUtenti();
-//    	entity = new GenericEntity<List<Utente>> (listaUtente) {};
-    	
+
 		List<UtenteDTO> listaUtente;
 		GenericEntity<List<UtenteDTO>> entity;
 		listaUtente = UtenteDAO.allUtenti();
 		entity = new GenericEntity<List<UtenteDTO>> (listaUtente) {};
-		
-		
-        System.out.println(listaUtente);
-        
         Response risposta = Response.ok( entity ).build();
         return risposta;
 

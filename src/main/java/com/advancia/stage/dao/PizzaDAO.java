@@ -24,7 +24,7 @@ import com.advancia.stage.dto.PizzaDTO;
 import com.advancia.stage.dto.UtenteDTO;
 import com.advancia.stage.model.Pizza;
 import com.advancia.stage.util.Gestore;
-import com.advancia.stage.util.Utility;
+import com.advancia.stage.util.ListModel;
 
 public class PizzaDAO {
 
@@ -68,7 +68,7 @@ public class PizzaDAO {
 			Query query = em.createQuery(q);
 			res = (ArrayList<Pizza>) query.getResultList();
 			
-			list = Utility.transformToPizzaDTO(res);
+			list = ListModel.transformToPizzaDTO(res);
 		} catch (NoResultException e) {
 			System.out.println("Nessun risultato per la query - " + e);
 		} catch (Exception e) {

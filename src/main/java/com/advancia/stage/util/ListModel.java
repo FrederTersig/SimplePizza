@@ -13,7 +13,7 @@ import com.advancia.stage.model.Pizza;
 import com.advancia.stage.model.Utente;
 
 //public class Utility<E, F> {
-public class Utility{
+public class ListModel{
 
 	public static List<UtenteDTO> transformToUtenteDTO(List<Utente> listaUtente){
 		List<UtenteDTO> listDTO = new ArrayList<UtenteDTO>();
@@ -22,32 +22,9 @@ public class Utility{
 			x.setId(Integer.parseInt(utente.getId()));
 			x.setUsername(utente.getUsername());
 			x.setPassword(utente.getPassword());
+			
 			List<PizzaDTO> p = new ArrayList<PizzaDTO>();
-    		utente.getPizza().forEach(pizza -> {
-    			PizzaDTO y = new PizzaDTO();
-
-    			ImpastoDTO z = new ImpastoDTO();
-
-    			z.setNome(pizza.getImpasto().getNome());
-    			z.setId(Integer.parseInt(pizza.getImpasto().getId()));
-    			
-    			y.setImpasto(z);
-    			y.setNome(pizza.getNome());
-    			y.setId(Integer.parseInt(pizza.getId()));
-
-    			List<IngredienteDTO> u = new ArrayList<IngredienteDTO>();
-    			pizza.getIngredienti().forEach(ingrediente -> {
-    				IngredienteDTO v = new IngredienteDTO();
-    				//aggiungi IngredienteDTO alla lista di ingredienteDTO!
-    				//ingrediente.setPizze(null);
-    				v.setId(Integer.parseInt(ingrediente.getId()));
-    				v.setNome(ingrediente.getNome());
-    				u.add(v);
-    			});
-    			y.setIngredienti(u);
-    			//infine aggiungi l'elemento ingredienteDTO alla lista u 
-    			p.add(y);
-    		});
+			p = Manage.convertPizzaDTOList(utente.getPizza(), "utente");
     		x.setPizza(p);
     		listDTO.add(x); // Aggiungo x
 
@@ -58,41 +35,45 @@ public class Utility{
 	
 	public static List<PizzaDTO> transformToPizzaDTO(List<Pizza> listaPizza){
 		List<PizzaDTO> listDTO = new ArrayList<PizzaDTO>();
-		//Una pizza ha un solo utente, un solo impasto, N ingredienti
-		listaPizza.forEach(pizza ->{
-				PizzaDTO x = new PizzaDTO();
-				// Setto i campi della pizza
-				x.setId(Integer.parseInt(pizza.getId())); // SET ID
-				x.setNome(pizza.getNome()); // SET NOME
-
-				// Setto ImpastoDTO
-				ImpastoDTO y = new ImpastoDTO();
-    			y.setNome(pizza.getImpasto().getNome());
-    			y.setId(Integer.parseInt(pizza.getImpasto().getId()));
-    			x.setImpasto(y); // SET IMPASTO
-    			
-    			// Setto UtenteDTO
-				UtenteDTO z = new UtenteDTO();
-				z.setUsername(pizza.getUtente().getUsername());
-				z.setPassword(pizza.getUtente().getPassword());
-				z.setId(Integer.parseInt(pizza.getUtente().getId()));
-				x.setUtente(z); // SET UTENTE 
-				
-				
-				//setto Ingrediente DTO
-				List<IngredienteDTO> u = new ArrayList<IngredienteDTO>();
-    			pizza.getIngredienti().forEach(ingrediente -> {
-    				IngredienteDTO v = new IngredienteDTO();
-    				v.setId(Integer.parseInt(ingrediente.getId()));
-    				v.setNome(ingrediente.getNome());
-    				u.add(v);
-    			});
-				
-				x.setIngredienti(u); // SET LISTA INGREDIENTI
-				
-				
-				listDTO.add(x);
-		});
+		listDTO = Manage.convertPizzaDTOList(listaPizza,"");
+		
+//		//Una pizza ha un solo utente, un solo impasto, N ingredienti
+//		listaPizza.forEach(pizza ->{
+//				PizzaDTO x = new PizzaDTO();
+//				// Setto i campi della pizza
+//				x.setId(Integer.parseInt(pizza.getId())); // SET ID
+//				x.setNome(pizza.getNome()); // SET NOME
+//
+//				// Setto ImpastoDTO
+//				ImpastoDTO y = new ImpastoDTO();
+//    			y.setNome(pizza.getImpasto().getNome());
+//    			y.setId(Integer.parseInt(pizza.getImpasto().getId()));
+//    			x.setImpasto(y); // SET IMPASTO
+//    			
+//    			// Setto UtenteDTO
+//				UtenteDTO z = new UtenteDTO();
+//				z.setUsername(pizza.getUtente().getUsername());
+//				z.setPassword(pizza.getUtente().getPassword());
+//				z.setId(Integer.parseInt(pizza.getUtente().getId()));
+//				x.setUtente(z); // SET UTENTE 
+//				
+//				
+//				//setto Ingrediente DTO
+//				List<IngredienteDTO> u = new ArrayList<IngredienteDTO>();
+//    			pizza.getIngredienti().forEach(ingrediente -> {
+//    				IngredienteDTO v = new IngredienteDTO();
+//    				v.setId(Integer.parseInt(ingrediente.getId()));
+//    				v.setNome(ingrediente.getNome());
+//    				u.add(v);
+//    			});
+//				
+//				x.setIngredienti(u); // SET LISTA INGREDIENTI
+//				
+//				
+//				listDTO.add(x);
+//		});
+//		
+		
 		
 		
 		return listDTO;
@@ -170,9 +151,6 @@ public class Utility{
     		x.setPizza(p);
 			listDTO.add(x);
 		});
-		
-		
-		
 		
 		return listDTO;
 	}

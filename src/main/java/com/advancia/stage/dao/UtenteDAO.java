@@ -26,7 +26,7 @@ import com.advancia.stage.dto.ImpastoDTO;
 import com.advancia.stage.dto.IngredienteDTO;
 import com.advancia.stage.model.Utente;
 import com.advancia.stage.util.Gestore;
-import com.advancia.stage.util.Utility;
+import com.advancia.stage.util.ListModel;
 
 
 public class UtenteDAO {
@@ -56,7 +56,8 @@ public class UtenteDAO {
 		Gestore.closing(emf, em);
 		return res;
 	}
-	
+
+//  Query di esempio con DTO
 //	TypedQuery<BookWithAuthorNames> q = em.createQuery(
 //	        "SELECT new org.thoughts.on.java.model.BookWithAuthorNames(b.id, b.title, b.price, concat(a.firstName, ' ', a.lastName)) FROM Book b JOIN b.author a WHERE b.title LIKE :title",
 //	        BookWithAuthorNames.class);
@@ -108,14 +109,8 @@ public class UtenteDAO {
 //			CriteriaQuery<Utente> q = cb.createQuery(Utente.class);
 //			Root<Utente> utenteInfo = q.from(Utente.class);
 //			q.select(utenteInfo);
-//			res = em.createQuery(q).getResultList();
-//			
-
-	    	
-			list = Utility.transformToUtenteDTO(res);
-			
-
-			
+//			res = em.createQuery(q).getResultList();	
+			list = ListModel.transformToUtenteDTO(res);		
 		} catch (NoResultException e) {
 			System.out.println("Nessun risultato per la query - " + e);
 		} catch (Exception e) {

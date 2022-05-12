@@ -18,7 +18,7 @@ import javax.persistence.TypedQuery;
 import com.advancia.stage.dto.ImpastoDTO;
 import com.advancia.stage.model.Impasto;
 import com.advancia.stage.util.Gestore;
-import com.advancia.stage.util.Utility;
+import com.advancia.stage.util.ListModel;
 
 public class ImpastoDAO {
 
@@ -92,7 +92,7 @@ public class ImpastoDAO {
 		
 		//List<ImpastoDTO> list = new ArrayList<ImpastoDTO>();
 		
-			list = Utility.transformToImpastoDTO(res);
+			list = ListModel.transformToImpastoDTO(res);
 		
 		
 		
